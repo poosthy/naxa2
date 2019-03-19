@@ -2,3 +2,8 @@ framework:
     router:
         strict_requirements: ~
         utf8: true
+
+contact_list_sujets:
+    path:     /get-sujets
+    defaults: { _controller: "Contact:listSujets" }
+    methods:  GET

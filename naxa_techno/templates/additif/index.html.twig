@@ -1,20 +1,98 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdditifController!{% endblock %}
+{% block title %}Additifs fonctionnels{% endblock %}
 
 {% block body %}
+<link href="https://fonts.googleapis.com/css?family=Jura" rel="stylesheet">
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-family: 'Jura', sans-serif;
+    }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="offset-2 mx-auto col-8">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Etudiant/Desktop/php/synfony/naxa_techno/src/Controller/AdditifController.php'|file_link(0) }}">src/Controller/AdditifController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Etudiant/Desktop/php/synfony/naxa_techno/templates/additif/index.html.twig'|file_link(0) }}">templates/additif/index.html.twig</a></code></li>
-    </ul>
+    <h1 class="text-center">Additifs fonctionnels</h1>
+
+    <p class="text-justify">
+        Renforcement mécanique, Antistatique, Conducteur, Blindages électromagnétiques,... <br />
+        Ne laissez plus vos affaires pendantes : Renforcement mécanique <br />
+        Le courant passe : Antistatique, conducteur <br />
+        Blindages électromagnétiques <br />
+        Magnétiques <br />
+        Green and fashion : Des produits verts sans voir rouge <br />
+        Aux normes citoyen pour les Biodégradables et Compostables <br />
+        Jeter l’éponge avec les Autonettoyants <br />
+        Une grosse claque aux microorganismes : les désinfectants et biocides
+    </p>
+
+    {% for type in types %}
+
+    {% if additifs %}
+
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="heading{{ loop.index }}">
+                <h2 class="text-center mb-0">
+                    <button class="btn btn-danger collapsed text-uppercase font-weight-bold" type="button"
+                        data-toggle="collapse" data-target="#collapse{{ loop.index }}" aria-expanded="false"
+                        aria-controls="collapse{{ loop.index }}" style="color:white; width: 30vw; font-size:1.3rem;">
+                        {{ type }} <i class="fa fa-angle-down" aria-hidden="true"
+                            style="color:white; size: 2rem !important;"> </i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapse{{ loop.index }}" class="collapse show mx-auto" aria-labelledby="heading{{ loop.index }}"
+                data-parent="#accordionExample">
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Modal 1-->
+                        {% for additif in additifs %}
+                        {% if additif.type is same as (type) %}
+                        <button type="button" class="btn btn-dark text-uppercase"
+                            style="color:white; width: 20vw; margin: auto;" data-toggle="modal"
+                            data-target="#exampleModalCenter{{ additif.id }}">
+                            {{ additif.titre}}
+                        </button>
+                        <div class="col-12 my-2">
+                            <div class="modal fade" id="exampleModalCenter{{ additif.id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-uppercase" id="exampleModalCenterTitle">
+                                                {{ additif.titre}}
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="text-black text-justify">
+                                                {{ additif.description }}
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger"
+                                                data-dismiss="modal">Fermer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
 </div>
+
 {% endblock %}
