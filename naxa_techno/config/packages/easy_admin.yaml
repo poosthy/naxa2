@@ -5,3 +5,4 @@ easy_admin:
        - App\Entity\Pigment
        - App\Entity\Additif
        - App\Entity\Nanomateriaux
+       - App\Entity\Sujet

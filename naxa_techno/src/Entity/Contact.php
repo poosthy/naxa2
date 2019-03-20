@@ -32,14 +32,14 @@ class Contact
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $objet;
-
-    /**
      * @ORM\Column(type="text")
      */
     private $message;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Sujet", inversedBy="contacts")
+     */
+    private $sujet;
 
     public function getId(): ?int
     {
@@ -82,18 +82,6 @@ class Contact
         return $this;
     }
 
-    public function getObjet(): ?string
-    {
-        return $this->objet;
-    }
-
-    public function setObjet(string $objet): self
-    {
-        $this->objet = $objet;
-
-        return $this;
-    }
-
     public function getMessage(): ?string
     {
         return $this->message;
@@ -102,6 +90,18 @@ class Contact
     public function setMessage(string $message): self
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getSujet(): ?Sujet
+    {
+        return $this->sujet;
+    }
+
+    public function setSujet(?Sujet $sujet): self
+    {
+        $this->sujet = $sujet;
 
         return $this;
     }
